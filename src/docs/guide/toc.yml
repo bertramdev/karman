@@ -1,1 +1,6 @@
 introduction: Introduction
+usage:
+  title: Usage 
+  providers: Providers
+  directories: Directories
+  files: Files

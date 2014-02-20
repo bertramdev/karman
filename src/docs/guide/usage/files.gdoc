@@ -1,0 +1,41 @@
+Working with files in the Karman plugin is fairly simple and most methods of the @CloudFile@ interface should be supported.
+The @CloudFile@ tries to adhere to similar methods in the @File@ class to make it simpler to deal with. For example:
+
+{code}
+def file = provider['mybucket']['test.txt']
+
+return file.text
+//or 
+return file.getText('UTF-8')
+//or
+return file.bytes
+//or
+return file.inputStream
+{code}
+
+In the cloud, files typically have a lot more meta data tied to them. To deal with this we have methods for @getContentType@ and @setContentType@. More complex meta data is still being worked on.
+
+When setting content values of a CloudFile, the contents are not immediately persisted (except in the LocalStorage implementation). To save your changes make sure the @save()@ method is called:
+
+{code}
+def file = provider['mybucket']['test.txt']
+
+file.text = "Setting some value to this file"
+file.save()
+{code}
+
+Files can be deleted as well:
+
+{code}
+file.delete()
+{code}
+
+Public Url can be fetched for a file via @getURL@:
+
+{code}
+file.getURL()
+//or if private and need public
+file.getURL(1.hour) //retrive a url good for 1 hour
+{code}
+
+NOTE: The above is not yet fully implemented , stay tuned!
