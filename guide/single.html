@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <title>Karman Plugin 0.1</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8" />
+        <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8" />
+    <script type="text/javascript">
+function addJsClass(el) {
+    var classes = document.body.className.split(" ");
+    classes.push("js");
+    document.body.className = classes.join(" ");
+}
+    </script>
+    </head>
+
+    <body class="body" onload="addJsClass();">
+        <div id="navigation">
+            <ul>
+                <li>
+                    <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                        <a href="../guide/index.html" class="button">Table of contents</a>
+                        <div id="nav-summary-childs" style="display:none;">
+                            
+                            <div class="toc-item" style="margin-left:0"><a href="#introduction"><strong>1</strong><span>Introduction</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0"><a href="#usage"><strong>2</strong><span>Usage</span></a></div>
+                            
+                        </div>
+                    </div>
+                </li>
+                <li class="separator selected">
+                    <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
+                </li>
+            </ul>
+        </div>
+        <div id="header">
+            <div class="images clearfix">
+                
+                
+            </div>
+            <p>Brief summary/description of the plugin.
+</p>
+        </div>
+
+
+        <table id="colset" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td id="col1">
+                    <div id="main" class="corner-all">
+
+                        <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
+
+                        <div class="project">
+                            <h1>Karman Plugin - Reference Documentation</h1>
+                            <p><strong>Authors:</strong> Your name</p>
+                            <p><strong>Version:</strong> 0.1</p>
+                            
+                        </div>
+
+                        
+                        <div id="table-of-content">
+                            <h2>Table of Contents</h2>
+                            
+                            <div class="toc-item" style="margin-left:0px"><a href="#introduction"><strong>1</strong><span>Introduction</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:0px"><a href="#usage"><strong>2</strong><span>Usage</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:10px"><a href="#providers"><strong>2.1</strong><span>Providers</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:10px"><a href="#directories"><strong>2.2</strong><span>Directories</span></a></div>
+                            
+                            <div class="toc-item" style="margin-left:10px"><a href="#files"><strong>2.3</strong><span>Files</span></a></div>
+                            
+                            <div style="clear:both" ></div>
+                        </div>
+                        
+                        
+
+<h1 id="introduction">1 Introduction</h1>
+Welcome to Karman. Karman is a standardized / extensible interface plugin for dealing with various cloud services.
+In the beginning, Karman will focus on providing rock solid simplified interfaces for storing / retreiving files in the cloud.<p class="paragraph"/><h2>Features</h2>
+<ul class="star">
+<li>Standardized interface for storing / retreiving files in the cloud.</li>
+<li>Easily reusable in other plugins with the immediate benefit of supporting many different storage engines.</li>
+<li>LocalStorage mode allows the same provider classes to store files locally and provides retrieval endpoint.</li>
+</ul><p class="paragraph"/>
+
+
+<h1 id="usage">2 Usage</h1>
+There are several tips and tricks to taking advantage of the Karman Storage API. This guide should get you started and is still a work in progress so expect more down the road.
+
+
+<h2 id="providers">2.1 Providers</h2>
+Karman provides a uniform interface in dealing with cloud stored files. It does this starting with the Provider class. 
+The Provider class is the starting point and is responsible for storing any credentials needed to interface with your cloud provider as well as instantiating Directories.
+By default the core Karman plugin comes with a LocalStorageProvider implementation:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> com.plugins.bertramlabs.karman.local.LocalStorageProvider<p class="paragraph"/>def provider = <span class="java&#45;keyword">new</span> LocalStorageProvider(basePath: '/path/to/store')</pre></div><p class="paragraph"/>As can be seen above the LocalStorageProvider provides an interface to a storage path on your filesystem. The plugin is designed to be very extensible and more providers are in the works such as the <code>karman-aws</code> plugin which will provide the <code>S3StorageProvider</code> for interfacing with S3.<p class="paragraph"/><h3>Getting Directories</h3><p class="paragraph"/>A Provider provides an interface to get or create root directories on the cloud. Most cloud providers dont use full folder trees but rather files with names containing a '/'. In the case of the S3Provider, a Directory can be considered Synonymous with a Bucket.<p class="paragraph"/>There are several ways get interact with directories. For example to get a list of directories we simply do the following:<p class="paragraph"/><div class="code"><pre>provider.getDirectories()</pre></div><p class="paragraph"/>This will return an array of <code>Directory</code> compatible classes.<p class="paragraph"/>Another option is to simply ask for a reference to a directory or bucket directly. This can be done by simply doing:<p class="paragraph"/><div class="code"><pre>provider.getDirectory('mybucket')</pre></div><p class="paragraph"/>This will return a directory object wether it exists or not. You can test for existance via the <code>exists()</code> method or call <code>mkdir()</code> to create the directory (more on this later).<p class="paragraph"/>We also take advantage of some groovy magic to make for some nifty shorthand to get a directory:<p class="paragraph"/><div class="code"><pre>provider&#91;'mybucket'&#93; //equivalent to getDirectory</pre></div>
+
+
+
+<h2 id="directories">2.2 Directories</h2>
+The <code>Directory</code> abstract class provides more convenience methods for getting files or creating files within your cloud provider.<p class="paragraph"/>We can start by simply listing all the files in our bucket/directory:<p class="paragraph"/><div class="code"><pre>provider&#91;'mybucket'&#93;.listFiles()</pre></div><p class="paragraph"/>The above will return an array of CloudFile objects. The listFiles method will also accept a few optional paramenters (this can vary slightly between providers but a few are considered standard). 
+One of which is the prefix option. It is important to note that the listFiles() method is a recursive scan and should list all files (wether nested or not).
+In cases where you may just want files within a subfolder you can do something like:<p class="paragraph"/><div class="code"><pre>provider&#91;'mybucket'&#93;.listFiles(prefix: 'config/') //List only files in the config path</pre></div><p class="paragraph"/>A Directory also supports several shortcuts for getting individual files:<p class="paragraph"/><div class="code"><pre>provider&#91;'mybucket'&#93;.getFile('test.txt')</pre></div><p class="paragraph"/>This will return a file object wether it exists or not. Use the <code>exists()</code> method on the CloudFile to determine existance.
+We also take advantage of some groovy magic, not only for getting references to CloudFiles but shorthand for uploading files.<p class="paragraph"/><div class="code"><pre>provider&#91;'mybucket'&#93;&#91;'test.txt'&#93;</pre></div><p class="paragraph"/>This returns a CloudFile object. We can do some chaining fun to quickly set the file contents:<p class="paragraph"/><div class="code"><pre>provider&#91;'mybucket'&#93;&#91;'test.txt'&#93;.text(<span class="java&#45;quote">"Setting the text value"</span>).contentType(<span class="java&#45;quote">"text/plain"</span>).save()</pre></div><p class="paragraph"/>We can even just set the value of this property directly to trigger an immediate upload:<p class="paragraph"/><div class="code"><pre>provider&#91;'mybucket'&#93;&#91;'test.txt'&#93; = <span class="java&#45;quote">"Setting the text value"</span> //Uploaded<p class="paragraph"/>//Or upload a File
+provider&#91;'mybucket'&#93;&#91;'test.txt'&#93; = <span class="java&#45;keyword">new</span> File(<span class="java&#45;quote">"path/to/file"</span>)<p class="paragraph"/>//Or transfer a file from one cloud provider to another
+s3provider&#91;'mybucket'&#93;&#91;'test.txt'&#93; = rackspace&#91;'mybucket'&#93;&#91;'test.txt'&#93;</pre></div><p class="paragraph"/>These are nifty shorthands for getting to the point with your files. In many cases though you will need more fine grained control over your file contents, meta, and upload strategy. To do this we can use the CloudFile directly.
+
+
+<h2 id="files">2.3 Files</h2>
+Working with files in the Karman plugin is fairly simple and most methods of the <code>CloudFile</code> interface should be supported.
+The <code>CloudFile</code> tries to adhere to similar methods in the <code>File</code> class to make it simpler to deal with. For example:<p class="paragraph"/><div class="code"><pre>def file = provider&#91;'mybucket'&#93;&#91;'test.txt'&#93;<p class="paragraph"/><span class="java&#45;keyword">return</span> file.text
+//or 
+<span class="java&#45;keyword">return</span> file.getText('UTF&#45;8')
+//or
+<span class="java&#45;keyword">return</span> file.bytes
+//or
+<span class="java&#45;keyword">return</span> file.inputStream</pre></div><p class="paragraph"/>In the cloud, files typically have a lot more meta data tied to them. To deal with this we have methods for <code>getContentType</code> and <code>setContentType</code>. More complex meta data is still being worked on.<p class="paragraph"/>When setting content values of a CloudFile, the contents are not immediately persisted (except in the LocalStorage implementation). To save your changes make sure the <code>save()</code> method is called:<p class="paragraph"/><div class="code"><pre>def file = provider&#91;'mybucket'&#93;&#91;'test.txt'&#93;<p class="paragraph"/>file.text = <span class="java&#45;quote">"Setting some value to <span class="java&#45;keyword">this</span> file"</span>
+file.save()</pre></div><p class="paragraph"/>Files can be deleted as well:<p class="paragraph"/><div class="code"><pre>file.delete()</pre></div><p class="paragraph"/>Public Url can be fetched for a file via <code>getURL</code>:<p class="paragraph"/><div class="code"><pre>file.getURL()
+//or <span class="java&#45;keyword">if</span> <span class="java&#45;keyword">private</span> and need <span class="java&#45;keyword">public</span>
+file.getURL(1.hour) //retrive a url good <span class="java&#45;keyword">for</span> 1 hour</pre></div><p class="paragraph"/>NOTE: The above is not yet fully implemented , stay tuned!
+
+                    </div>
+                </td>
+                <td id="col2">
+            <div class="local clearfix">
+                <div class="local-title">
+                    <a href="../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                </div>
+                <div class="menu">
+                    
+                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Classes</h1><div class="menu-sub">
+                        
+                        
+                        <div class="menu-item"><a href="../ref/Classes/CloudFile.html">CloudFile</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="../ref/Classes/Directory.html">Directory</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="../ref/Classes/StorageProvider.html">StorageProvider</a>
+                        </div>
+                        
+                        </div>
+                    </div>
+                    
+                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">LocalStorage</h1><div class="menu-sub">
+                        
+                        
+                        <div class="menu-item"><a href="../ref/LocalStorage/LocalDirectory.html">LocalDirectory</a>
+                        </div>
+                        
+                        <div class="menu-item"><a href="../ref/LocalStorage/LocalStorageProvider.html">LocalStorageProvider</a>
+                        </div>
+                        
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </td>
+            </tr>
+        </table>
+
+        <div id="footer">
+            
+            
+        </div>
+
+
+
+<script type="text/javascript" src="../js/docs.js"></script>
+
+    </body>
+</html>

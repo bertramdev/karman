@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>2.2 Directories 0.1</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
+    <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
+    <script type="text/javascript">
+function addJsClass() {
+    var classes = document.body.className.split(" ");
+    classes.push("js");
+    document.body.className = classes.join(" ");
+}
+    </script>
+</head>
+
+<body class="body" onload="addJsClass();">
+<div id="navigation">
+    <ul>
+        <li>
+            <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                <a href="../../guide/index.html" class="button">Table of contents</a>
+
+                <div id="nav-summary-childs" style="display:none;">
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/introduction.html"><strong>1</strong><span>Introduction</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/usage.html"><strong>2</strong><span>Usage</span></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </li>
+        <li class="separator selected">
+            <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
+        </li>
+    </ul>
+</div>
+<div id="header">
+    <div class="images clearfix">
+        
+        
+    </div>
+    <p>Brief summary/description of the plugin.
+</p>
+</div>
+
+
+<table id="colset" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="col1">
+            <div id="main" class="corner-all">
+
+                
+                    <div class="toc-item prev-left"><a href="../../guide/introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
+                
+
+                <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
+
+                
+
+
+                <div class="project">
+                    <h1>2.2 Directories - Reference Documentation</h1>
+
+                    <p><strong>Authors:</strong> Your name</p>
+
+                    <p><strong>Version:</strong> 0.1</p>
+
+                    
+                </div>
+
+                
+
+                
+
+<h2 id="directories">2.2 Directories</h2>
+The <code>Directory</code> abstract class provides more convenience methods for getting files or creating files within your cloud provider.<p class="paragraph"/>We can start by simply listing all the files in our bucket/directory:<p class="paragraph"/><div class="code"><pre>provider&#91;'mybucket'&#93;.listFiles()</pre></div><p class="paragraph"/>The above will return an array of CloudFile objects. The listFiles method will also accept a few optional paramenters (this can vary slightly between providers but a few are considered standard). 
+One of which is the prefix option. It is important to note that the listFiles() method is a recursive scan and should list all files (wether nested or not).
+In cases where you may just want files within a subfolder you can do something like:<p class="paragraph"/><div class="code"><pre>provider&#91;'mybucket'&#93;.listFiles(prefix: 'config/') //List only files in the config path</pre></div><p class="paragraph"/>A Directory also supports several shortcuts for getting individual files:<p class="paragraph"/><div class="code"><pre>provider&#91;'mybucket'&#93;.getFile('test.txt')</pre></div><p class="paragraph"/>This will return a file object wether it exists or not. Use the <code>exists()</code> method on the CloudFile to determine existance.
+We also take advantage of some groovy magic, not only for getting references to CloudFiles but shorthand for uploading files.<p class="paragraph"/><div class="code"><pre>provider&#91;'mybucket'&#93;&#91;'test.txt'&#93;</pre></div><p class="paragraph"/>This returns a CloudFile object. We can do some chaining fun to quickly set the file contents:<p class="paragraph"/><div class="code"><pre>provider&#91;'mybucket'&#93;&#91;'test.txt'&#93;.text(<span class="java&#45;quote">"Setting the text value"</span>).contentType(<span class="java&#45;quote">"text/plain"</span>).save()</pre></div><p class="paragraph"/>We can even just set the value of this property directly to trigger an immediate upload:<p class="paragraph"/><div class="code"><pre>provider&#91;'mybucket'&#93;&#91;'test.txt'&#93; = <span class="java&#45;quote">"Setting the text value"</span> //Uploaded<p class="paragraph"/>//Or upload a File
+provider&#91;'mybucket'&#93;&#91;'test.txt'&#93; = <span class="java&#45;keyword">new</span> File(<span class="java&#45;quote">"path/to/file"</span>)<p class="paragraph"/>//Or transfer a file from one cloud provider to another
+s3provider&#91;'mybucket'&#93;&#91;'test.txt'&#93; = rackspace&#91;'mybucket'&#93;&#91;'test.txt'&#93;</pre></div><p class="paragraph"/>These are nifty shorthands for getting to the point with your files. In many cases though you will need more fine grained control over your file contents, meta, and upload strategy. To do this we can use the CloudFile directly.
+
+
+                <div style="clear:both;margin-top:15px;"></div>
+                
+                    <div class="toc-item prev-left"><a href="../../guide/introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
+                
+                <div style="clear:both"></div>
+            </div>
+        </td>
+        <td id="col2">
+            <div class="local clearfix">
+                <div class="local-title">
+                    <a href="../../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                </div>
+                <div class="menu">
+                    
+                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Classes</h1><div class="menu-sub">
+                        
+                            
+                            <div class="menu-item"><a href="../../ref/Classes/CloudFile.html">CloudFile</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Classes/Directory.html">Directory</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Classes/StorageProvider.html">StorageProvider</a>
+                            </div>
+                            
+                            </div>
+                    </div>
+                    
+                    <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">LocalStorage</h1><div class="menu-sub">
+                        
+                            
+                            <div class="menu-item"><a href="../../ref/LocalStorage/LocalDirectory.html">LocalDirectory</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/LocalStorage/LocalStorageProvider.html">LocalStorageProvider</a>
+                            </div>
+                            
+                            </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div id="footer">
+    
+    
+</div>
+
+<script type="text/javascript" src="../js/docs.js"></script>
+
+</body>
+</html>

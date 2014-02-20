@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>Karman Plugin 0.1</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
+    <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
+    <script type="text/javascript">
+function addJsClass(el) {
+    var classes = document.body.className.split(" ");
+    classes.push("js");
+    document.body.className = classes.join(" ");
+}
+    </script>
+</head>
+
+<body class="body" onload="addJsClass();">
+
+<div id="navigation">
+    <ul>
+        <li>
+            <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                <a href="../../guide/index.html" class="button">Table of contents</a>
+
+                <div id="nav-summary-childs">
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/introduction.html"><strong>1</strong><span>Introduction</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/usage.html"><strong>2</strong><span>Usage</span></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </li>
+        <li class="separator selected">
+            <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
+        </li>
+    </ul>
+</div>
+<div id="header">
+    <div class="images clearfix">
+        
+        
+    </div>
+    <p>Brief summary/description of the plugin.
+</p>
+</div>
+
+
+<table id="colset" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="col1">
+            <div id="main" class="reference corner-all">
+
+                <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
+
+                <h1>CloudFile</h1><p class="paragraph"/><h2>Purpose</h2><p class="paragraph"/>This is an abstract class implementation for manipulating files in the cloud.<p class="paragraph"/><h2>Examples</h2><p class="paragraph"/>Below is an example of how a CloudFile might be used. Typically you would not use this class directly but rather use an implementation of this class. (i.e. <code>LocalFile</code> or <code>S3File</code>)<p class="paragraph"/><div class="code"><pre>CloudFile file = <span class="java&#45;keyword">new</span> CloudFile(provider: provider, parent: directory , name: name)<p class="paragraph"/>file.text = <span class="java&#45;quote">"Setting test Content"</span>
+file.contentType = <span class="java&#45;quote">"text/plain"</span>
+<span class="java&#45;keyword">if</span>(!file.exists()) &#123;
+    file.save()
+&#125;</pre></div><p class="paragraph"/><h2>Description</h2><p class="paragraph"/>The CloudFile Interface supports the following Methods and Properties:
+<ul class="star">
+<li><code>name</code> - Property for setting the file name or retrieving.</li>
+<li><code>getInputStream()</code> - Retrieve an input stream containing the contents of the file</li>
+<li><code>getText()</code> - Get a String instance of the contents of the file. (Optionally pass an encoding)</li>
+<li><code>getBytes()</code> - Get a byte array of the contents of this file.</li>
+<li><code>getParent()</code> - Get reference to the Directory object this file is stored in.</li>
+<li><code>setBytes()</code> - Set the contents of this file to a byte array (note in most cases save() must be called to commit this to the cloud).</li>
+<li><code>setText()</code>  - Set the contents of this file to a String value (note in most cases save() must be called to commit this to the cloud).</li>
+<li><code>contentType</code> - Get or set the contentType of the file.</li>
+<li><code>contentLength</code> - Get or set the contentLength of the file.</li>
+<li><code>exists()</code> - Test if the file actually exists or not on the server</li>
+<li><code>isDirectory()</code> - Returns false in most cases (LocalStorage implementations may return true)</li>
+<li><code>isFile()</code> - Returns true in most cases (LocalStorage implementation is the exception)</li>
+<li><code>save()</code> - Save the file to the server.</li>
+<li><code>delete()</code> - Delete the file from the server.</li>
+</ul><p class="paragraph"/>
+            </div>
+        </td>
+        <td id="col2">
+            <div class="local clearfix">
+                <div class="local-title">
+                    <a href="../../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                </div>
+                <div class="menu">
+                    
+                    <div class="menu-block">
+                        <h1 class="menu-title" onclick="toggleRef(nextElement(this))">Classes</h1>
+                        <div class="menu-sub selected">
+                            
+                            
+                            <div class="menu-item"><a href="../../ref/Classes/CloudFile.html">CloudFile</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Classes/Directory.html">Directory</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Classes/StorageProvider.html">StorageProvider</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="menu-block">
+                        <h1 class="menu-title" onclick="toggleRef(nextElement(this))">LocalStorage</h1>
+                        <div class="menu-sub">
+                            
+                            
+                            <div class="menu-item"><a href="../../ref/LocalStorage/LocalDirectory.html">LocalDirectory</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/LocalStorage/LocalStorageProvider.html">LocalStorageProvider</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div id="footer">
+    
+    
+</div>
+
+
+<script type="text/javascript" src="../../js/docs.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>Karman Plugin 0.1</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
+    <link rel="stylesheet" href="../../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
+    <script type="text/javascript">
+function addJsClass(el) {
+    var classes = document.body.className.split(" ");
+    classes.push("js");
+    document.body.className = classes.join(" ");
+}
+    </script>
+</head>
+
+<body class="body" onload="addJsClass();">
+
+<div id="navigation">
+    <ul>
+        <li>
+            <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
+                <a href="../../guide/index.html" class="button">Table of contents</a>
+
+                <div id="nav-summary-childs">
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/introduction.html"><strong>1</strong><span>Introduction</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../../guide/usage.html"><strong>2</strong><span>Usage</span></a>
+                    </div>
+                    
+                </div>
+            </div>
+        </li>
+        <li class="separator selected">
+            <a id="ref-button" onclick="localToggle(); return false;" href="#">Quick Reference</a>
+        </li>
+    </ul>
+</div>
+<div id="header">
+    <div class="images clearfix">
+        
+        
+    </div>
+    <p>Brief summary/description of the plugin.
+</p>
+</div>
+
+
+<table id="colset" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td id="col1">
+            <div id="main" class="reference corner-all">
+
+                <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
+
+                <h1>Directory</h1><p class="paragraph"/><h2>Purpose</h2><p class="paragraph"/>This is an abstract class implementation for managing directories / buckets in the cloud.<p class="paragraph"/><h2>Examples</h2><p class="paragraph"/>Below is an example of how a <code>Directory</code> might be used. Typically you would not use this class directly but rather use an implementation of this class. (i.e. <code>LocalDirectory</code> or <code>S3Directory</code>)<p class="paragraph"/><div class="code"><pre>Directory dir = <span class="java&#45;keyword">new</span> Directory(provider: provider, name: name)<p class="paragraph"/><span class="java&#45;keyword">if</span>(!dir.exists()) &#123;
+    dir.mkdir()    
+&#125;
+//List all files recursively
+dir.listFiles()<p class="paragraph"/>//List Files in a sub<span class="java&#45;quote">"folder"</span>
+dir.listFiles(prefix: 'config/')</pre></div><p class="paragraph"/><h2>Description</h2><p class="paragraph"/>The CloudFile Interface supports the following Methods and Properties:
+<ul class="star">
+<li><code>name</code> - Property for setting the directory name or retrieving.</li>
+<li><code>provider</code> - Reference to the provider for this directory (needed to get access to credentials)</li>
+<li><code>exists()</code> - Test if the directory actually exists or not on the server</li>
+<li><code>isDirectory()</code> - Returns true in most cases.</li>
+<li><code>isFile()</code> - Returns false.</li>
+<li><code>mkdir()</code> - Save the directory to the server.</li>
+<li><code>save()</code> - Save the directory to the server.</li>
+<li><code>delete()</code> - Delete the directory from the server.</li>
+<li><code>getFile()</code> - Returns a reference to a file by name. Creates a new CloudFile object if none exist.</li>
+<li><code>listFiles()</code> - Lists all files in the directory (in most cases this is recursive). A prefix option can be specified to filter the list.</li>
+</ul><p class="paragraph"/>
+            </div>
+        </td>
+        <td id="col2">
+            <div class="local clearfix">
+                <div class="local-title">
+                    <a href="../../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
+                </div>
+                <div class="menu">
+                    
+                    <div class="menu-block">
+                        <h1 class="menu-title" onclick="toggleRef(nextElement(this))">Classes</h1>
+                        <div class="menu-sub selected">
+                            
+                            
+                            <div class="menu-item"><a href="../../ref/Classes/CloudFile.html">CloudFile</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Classes/Directory.html">Directory</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/Classes/StorageProvider.html">StorageProvider</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="menu-block">
+                        <h1 class="menu-title" onclick="toggleRef(nextElement(this))">LocalStorage</h1>
+                        <div class="menu-sub">
+                            
+                            
+                            <div class="menu-item"><a href="../../ref/LocalStorage/LocalDirectory.html">LocalDirectory</a>
+                            </div>
+                            
+                            <div class="menu-item"><a href="../../ref/LocalStorage/LocalStorageProvider.html">LocalStorageProvider</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div id="footer">
+    
+    
+</div>
+
+
+<script type="text/javascript" src="../../js/docs.js"></script>
+
+</body>
+</html>
