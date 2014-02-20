@@ -42,6 +42,13 @@ abstract class Directory implements DirectoryInterface {
 		cloudFile.save()
 	}
 
+	public void putAt(String key, CloudFile file)  {
+		def cloudFile = getFile(key)
+		cloudFile.contentType = file.contentType	
+		cloudFile.bytes = file.bytes
+		cloudFile.save()
+	}
+
 	public void putAt(String key, byte[] bytes)  {
 		def cloudFile = getFile(key)
 		def servletContext = org.codehaus.groovy.grails.web.context.ServletContextHolder.getServletContext()

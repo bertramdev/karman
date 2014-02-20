@@ -73,7 +73,8 @@ class LocalCloudFile extends CloudFile {
 	}
 
 	def save() {
-		fsFile.flush()
+		// Auto saves
+		return
 	}
 
 	def delete() {

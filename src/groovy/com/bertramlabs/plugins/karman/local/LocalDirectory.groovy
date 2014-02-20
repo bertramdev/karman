@@ -33,15 +33,14 @@ class LocalDirectory extends com.bertramlabs.plugins.karman.Directory {
 	List listFiles(options=[:]) {
 		DirectoryScanner scanner = new DirectoryScanner()
 		if(options.excludes) {
-			scanner.setExcludes(excludes as String[])
+			scanner.setExcludes(options.excludes as String[])
 		}
-		if(options.incldues) {
-			scanner.setIncludes(excludes as String[])	
+		if(options.includes) {
+			scanner.setIncludes(options.includes as String[])	
 		}
 		if(options.prefix) {
 			def prefix = options.prefix
 			if(prefix.endsWith("/")) {
-				prefix += "**/*"
 				scanner.setIncludes([prefix + '**/*'] as String[])		
 			} else {
 				scanner.setIncludes([prefix+'*',prefix + '*/**/*'] as String[])		
@@ -62,7 +61,7 @@ class LocalDirectory extends com.bertramlabs.plugins.karman.Directory {
 	}
 
 	CloudFile getFile(String name) {
-		new LocalCloudFile(provider: provider, parent: this, name: this)
+		new LocalCloudFile(provider: provider, parent: this, name: name)
 	}
 
 }
