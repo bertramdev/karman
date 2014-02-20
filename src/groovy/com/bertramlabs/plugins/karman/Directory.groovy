@@ -31,6 +31,36 @@ abstract class Directory implements DirectoryInterface {
 		getFile(key)
 	}
 
+	public void putAt(String key, File file)  {
+		def cloudFile = getFile(key)
+		def mimeType = java.net.URLConnection.guessContentTypeFromName(key)
+		if(mimeType) {
+			cloudFile.contentType = mimeType
+		}
+		cloudFile.bytes = file.bytes
+		cloudFile.save()
+	}
+
+	public void putAt(String key, byte[] bytes)  {
+		def cloudFile = getFile(key)
+		def mimeType = java.net.URLConnection.guessContentTypeFromName(key)
+		if(mimeType) {
+			cloudFile.contentType = mimeType
+		}
+		cloudFile.bytes = bytes
+		cloudFile.save()
+	}
+
+	public void putAt(String key, String text)  {
+		def cloudFile = getFile(key)
+		def mimeType = java.net.URLConnection.guessContentTypeFromName(key)
+		if(mimeType) {
+			cloudFile.contentType = mimeType
+		}
+		cloudFile.text = text
+		cloudFile.save()
+	}
+
 	Boolean isDirectory() {
 		return true
 	}
