@@ -24,7 +24,7 @@ interface CloudFileInterface {
 
 	InputStream getInputStream()
 
-	String getText()
+	String getText(String encoding)
 
 	Directory getParent()
 

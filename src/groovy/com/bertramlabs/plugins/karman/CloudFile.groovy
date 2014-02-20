@@ -39,4 +39,8 @@ abstract class CloudFile implements CloudFileInterface {
 	Boolean isDirectory() {
 		return false
 	}
+
+	String toString() {
+		return name
+	}
 }

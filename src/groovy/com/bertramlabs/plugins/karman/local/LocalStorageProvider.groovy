@@ -14,11 +14,28 @@
  * limitations under the License.
  */
 
-package com.bertramlabs.plugins.karman
+package com.bertramlabs.plugins.karman.local
 
-abstract class StorageProvider implements StorageProviderInterface {
-	static String name = "Unimplemented"
-	public Directory getAt(String key) {
-		getDirectory(key)
+import com.bertramlabs.plugins.karman.*
+
+class LocalStorageProvider extends StorageProvider {
+	static String name = "local"
+
+	String basePath
+
+	Directory getDirectory(String name) {
+		new LocalDirectory(name: name, provider: this)
+	}
+
+	
+
+	def getDirectories() {
+		def directories = []
+		new File(basePath).eachFile { file ->
+			if(file.isDirectory()) {
+				directories << new LocalDirectory(name: file.name, provider: this)
+			}
+		}
+		return directories
 	}
 }

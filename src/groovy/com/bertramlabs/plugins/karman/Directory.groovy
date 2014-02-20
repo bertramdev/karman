@@ -33,7 +33,8 @@ abstract class Directory implements DirectoryInterface {
 
 	public void putAt(String key, File file)  {
 		def cloudFile = getFile(key)
-		def mimeType = java.net.URLConnection.guessContentTypeFromName(key)
+		def servletContext = org.codehaus.groovy.grails.web.context.ServletContextHolder.getServletContext()
+		def mimeType = servletContext ? servletContext.getMimeType(key) : java.net.URLConnection.guessContentTypeFromName(key)
 		if(mimeType) {
 			cloudFile.contentType = mimeType
 		}
@@ -43,7 +44,8 @@ abstract class Directory implements DirectoryInterface {
 
 	public void putAt(String key, byte[] bytes)  {
 		def cloudFile = getFile(key)
-		def mimeType = java.net.URLConnection.guessContentTypeFromName(key)
+		def servletContext = org.codehaus.groovy.grails.web.context.ServletContextHolder.getServletContext()
+		def mimeType = servletContext ? servletContext.getMimeType(key) : java.net.URLConnection.guessContentTypeFromName(key)
 		if(mimeType) {
 			cloudFile.contentType = mimeType
 		}
@@ -53,7 +55,8 @@ abstract class Directory implements DirectoryInterface {
 
 	public void putAt(String key, String text)  {
 		def cloudFile = getFile(key)
-		def mimeType = java.net.URLConnection.guessContentTypeFromName(key)
+		def servletContext = org.codehaus.groovy.grails.web.context.ServletContextHolder.getServletContext()
+		def mimeType = servletContext ? servletContext.getMimeType(key) : java.net.URLConnection.guessContentTypeFromName(key)
 		if(mimeType) {
 			cloudFile.contentType = mimeType
 		}
@@ -63,5 +66,9 @@ abstract class Directory implements DirectoryInterface {
 
 	Boolean isDirectory() {
 		return true
+	}
+
+	String toString() {
+		return name
 	}
 }
