@@ -1,0 +1,9 @@
+Since Karman ships with the @LocalStorageProvider@. It also provides mappings for fetching files from this store. This can be configured with the following options:
+
+{code}
+grailsApplication.config.grails.plugins.karman {
+	serveLocalStorage = true 
+	serveLocalMapping = 'storage' // means /storage is base path
+	storagePath = '/path/to/filestore'
+}
+{code}

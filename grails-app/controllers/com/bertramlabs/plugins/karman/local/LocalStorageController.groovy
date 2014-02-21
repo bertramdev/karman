@@ -6,7 +6,7 @@ class LocalStorageController {
     def show() { 
     	def config      = grailsApplication.config.grails.plugins.karman
     	def storagePath = config.local.storagePath
-		def provider    = new LocalStorageProvider(basePath: storaegPath)
+		def provider    = new LocalStorageProvider(basePath: storagePath)
 		def extension   = extensionFromURI(request.forwardURI)
 		def directoryName = params.directory ?: '.'
 		def fileName = params.id
