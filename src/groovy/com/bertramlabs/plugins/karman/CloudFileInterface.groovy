@@ -54,7 +54,7 @@ interface CloudFileInterface {
 	
 	void getMetaAttribute(key)
 
-	void getMetaAttribtues()
+	void getMetaAttributes()
 
 	void removeMetaAttribute(key)
 }

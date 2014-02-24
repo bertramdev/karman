@@ -80,7 +80,7 @@ class LocalCloudFile extends CloudFile {
 		log.warn("Karman CloudFile Meta Attributes Not Available for LocalCloudFile")
 	}
 
-	void getMetaAttribtues() {
+	void getMetaAttributes() {
 		log.warn("Karman CloudFile Meta Attributes Not Available for LocalCloudFile")
 	}
 
