@@ -1,6 +1,6 @@
 import org.springframework.context.ApplicationContext
 
-class AssetUrlMappings {
+class KarmanUrlMappings {
 
 	static mappings = { ApplicationContext context ->
 		def config = getGrailsApplication().config.grails.plugins.karman
