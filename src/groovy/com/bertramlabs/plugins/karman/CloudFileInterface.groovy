@@ -50,4 +50,11 @@ interface CloudFileInterface {
 
 	def delete()
 
+	void setMetaAttribute(key, value)
+	
+	void getMetaAttribute(key)
+
+	void getMetaAttribtues()
+
+	void removeMetaAttribute(key)
 }

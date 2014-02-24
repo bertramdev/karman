@@ -1,3 +1,5 @@
 .DS_Store
 /target
+plugin.xml
+*.zip
 
