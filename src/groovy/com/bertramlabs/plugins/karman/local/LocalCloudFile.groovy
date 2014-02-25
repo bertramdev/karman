@@ -72,15 +72,15 @@ class LocalCloudFile extends CloudFile {
 		fsFile.exists()
 	}
 
-	void setMetaAttribute(key, value) {
+    void setMetaAttribute(key, value) {
 		log.warn("Karman CloudFile Meta Attributes Not Available for LocalCloudFile")
 	}
 
-	void getMetaAttribute(key) {
+	def getMetaAttribute(key) {
 		log.warn("Karman CloudFile Meta Attributes Not Available for LocalCloudFile")
 	}
 
-	void getMetaAttributes() {
+	def getMetaAttributes() {
 		log.warn("Karman CloudFile Meta Attributes Not Available for LocalCloudFile")
 	}
 
@@ -88,8 +88,8 @@ class LocalCloudFile extends CloudFile {
 		log.warn("Karman CloudFile Meta Attributes Not Available for LocalCloudFile")
 	}
 
-	def save() {
-		// Auto saves
+    def save(acl = '') {
+        // Auto saves
 		return
 	}
 

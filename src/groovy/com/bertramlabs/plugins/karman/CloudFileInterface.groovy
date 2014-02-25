@@ -46,15 +46,15 @@ interface CloudFileInterface {
 
 	Boolean isDirectory()
 
-	def save()
+	def save(acl)
 
 	def delete()
 
 	void setMetaAttribute(key, value)
 	
-	void getMetaAttribute(key)
+	def getMetaAttribute(key)
 
-	void getMetaAttributes()
+	def getMetaAttributes()
 
 	void removeMetaAttribute(key)
 }

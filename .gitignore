@@ -1,10 +1,20 @@
-.DS_Store
+# GRAILS files
+/web-app/WEB-INF
 /target
-<<<<<<< HEAD
-*.zip
-plugin.xml
-=======
-plugin.xml
-*.zip
->>>>>>> 779e4e536008e5bb097e08024d1b86930077dea7
+/target-eclipse
 
+# IDE files
+.classpath
+.idea/
+.project
+.settings
+/*.launch
+/*.tmproj
+
+*.log
+*.zip
+*.iml
+*.sha1
+/out
+plugin.xml
+.DS_Store
