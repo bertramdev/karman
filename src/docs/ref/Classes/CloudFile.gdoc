@@ -34,5 +34,10 @@ The CloudFile Interface supports the following Methods and Properties:
     * @exists()@ - Test if the file actually exists or not on the server
     * @isDirectory()@ - Returns false in most cases (LocalStorage implementations may return true)
     * @isFile()@ - Returns true in most cases (LocalStorage implementation is the exception)
+    * @setMetaAttribute()@ - Set a key with a value for the file.
+    * @getMetaAttribute()@ - Get value of meta attribtue.
+    * @getMetaAttribtues()@ - Get a Map of all metadata.
+    * @removeMetaAttribute() - Remove an attribute on the file.
+
     * @save()@ - Save the file to the server.
     * @delete()@ - Delete the file from the server.

@@ -1,5 +1,10 @@
 .DS_Store
 /target
+<<<<<<< HEAD
 *.zip
 plugin.xml
+=======
+plugin.xml
+*.zip
+>>>>>>> 779e4e536008e5bb097e08024d1b86930077dea7
 
