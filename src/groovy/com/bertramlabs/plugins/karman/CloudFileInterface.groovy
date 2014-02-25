@@ -46,7 +46,7 @@ interface CloudFileInterface {
 
 	Boolean isDirectory()
 
-	def save()
+	def save(acl)
 
 	def delete()
 
