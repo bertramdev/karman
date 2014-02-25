@@ -33,4 +33,6 @@ interface DirectoryInterface {
 
 	public CloudFile getAt(String key)
 
+	def save()
+
 }

@@ -71,6 +71,14 @@ abstract class Directory implements DirectoryInterface {
 		cloudFile.save()
 	}
 
+	def mkdir() {
+		save()
+	}
+
+	def mkdirs() {
+		save()
+	}
+
 	Boolean isDirectory() {
 		return true
 	}
