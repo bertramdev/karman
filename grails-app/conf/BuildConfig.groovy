@@ -1,8 +1,9 @@
 grails.project.work.dir = 'target'
 
+grails.project.dependency.resolver = 'maven'
 grails.project.dependency.resolution = {
     inherits 'global'
-    log "warn"
+    log 'warn'
     legacyResolve false
     repositories {
         grailsCentral()
@@ -10,9 +11,8 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        build(":tomcat:$grailsVersion",
-              ":release:2.2.1",
-              ":rest-client-builder:1.0.3") {
+        build ':tomcat:7.0.50.1'
+        build(':release:3.0.1') {
             export = false
         }
     }
