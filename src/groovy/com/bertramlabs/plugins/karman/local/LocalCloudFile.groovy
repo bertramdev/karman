@@ -76,11 +76,11 @@ class LocalCloudFile extends CloudFile {
 		log.warn("Karman CloudFile Meta Attributes Not Available for LocalCloudFile")
 	}
 
-	void getMetaAttribute(key) {
+	def getMetaAttribute(key) {
 		log.warn("Karman CloudFile Meta Attributes Not Available for LocalCloudFile")
 	}
 
-	void getMetaAttributes() {
+	def getMetaAttributes() {
 		log.warn("Karman CloudFile Meta Attributes Not Available for LocalCloudFile")
 	}
 
