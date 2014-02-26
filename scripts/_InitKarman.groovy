@@ -7,4 +7,7 @@ target(initKarman: "Load Karman Config to Configuration Holder") {
 
     karmanConfigHolder.grailsApplication = grailsApp
     karmanConfigHolder.config = grailsApp.config.grails.plugins.karman
+
+	event("KarmanConfig", [karmanConfigHolder])
+
 }
