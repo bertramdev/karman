@@ -16,6 +16,8 @@
 
 package com.bertramlabs.plugins.karman
 
+import com.bertramlabs.plugins.karman.exceptions.ProviderNotFoundException
+
 abstract class StorageProvider implements StorageProviderInterface {
 	static String name = "Unimplemented"
 
@@ -30,5 +32,17 @@ abstract class StorageProvider implements StorageProviderInterface {
 			return KarmanConfigHolder.config.defaultFileACL
 		}
 		return defaultFileACL
+	}
+
+	public static StorageProvider create(options = [:]) {
+		def provider = options.remove('provider')
+		if(!provider) {
+			throw new ProviderNotFoundException()	
+		}
+		def providerClass = KarmanConfigHolder.providerTypes.find{ it.key == provider}
+		if(!providerClass) {
+			throw new ProviderNotFoundException(provider)
+		}
+		return providerClass.newInstance(options)
 	}
 }
