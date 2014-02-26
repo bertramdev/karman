@@ -1,5 +1,7 @@
+import com.bertramlabs.plugins.karman.KarmanConfigHolder
+
 class KarmanGrailsPlugin {
-    def version         = "0.2.1"
+    def version         = "0.2.2"
     def grailsVersion   = "2.0 > *"
     def title           = "Karman Plugin"
     def author          = "David Estes"
@@ -13,4 +15,11 @@ class KarmanGrailsPlugin {
     def pluginExcludes  = [
     ]
     def developers      = [ [name: 'Brian Wheeler'] ]
+
+
+    def doWithApplicationContext = { applicationContext ->
+        def config = application.config.grails.plugins.karman
+
+        KarmanConfigHolder.config = config
+    }
 }

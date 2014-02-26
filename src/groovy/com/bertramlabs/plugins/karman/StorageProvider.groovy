@@ -18,7 +18,17 @@ package com.bertramlabs.plugins.karman
 
 abstract class StorageProvider implements StorageProviderInterface {
 	static String name = "Unimplemented"
+
+	CloudFileACL defaultFileACL
+
 	public Directory getAt(String key) {
 		getDirectory(key)
+	}
+
+	public CloudFileACL getDefaultFileACL() {
+		if(!defaultFileACL) {
+			return KarmanConfigHolder.config.defaultFileACL
+		}
+		return defaultFileACL
 	}
 }
