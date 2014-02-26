@@ -3,7 +3,7 @@ The Provider class is the starting point and is responsible for storing any cred
 By default the core Karman plugin comes with a LocalStorageProvider implementation:
 
 {code}
-import com.plugins.bertramlabs.karman.local.LocalStorageProvider
+import com.bertramlabs.plugins.karman.local.LocalStorageProvider
 
 def provider = new LocalStorageProvider(basePath: '/path/to/store')
 {code}
