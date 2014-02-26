@@ -12,7 +12,7 @@ class KarmanConfigHolder {
 	static grailsApplication
 
 	static void setConfig(configMap) {
-		KarmanConfigHolder.config += configMap
+		config += configMap
 
 		if(configMap.providerTypes) {
 			KarmanConfigHolder.providerTypes += configMap.providerTypes

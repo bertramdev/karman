@@ -1,7 +1,7 @@
 import com.bertramlabs.plugins.karman.KarmanConfigHolder
 
 class KarmanGrailsPlugin {
-    def version         = "0.3.1"
+    def version         = "0.3.2"
     def grailsVersion   = "2.0 > *"
     def title           = "Karman Plugin"
     def author          = "David Estes"
