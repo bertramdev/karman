@@ -39,7 +39,7 @@ abstract class StorageProvider implements StorageProviderInterface {
 		if(!provider) {
 			throw new ProviderNotFoundException()	
 		}
-		def providerClass = KarmanConfigHolder.providerTypes.find{ it.key == provider}
+		def providerClass = KarmanConfigHolder.providerTypes.find{ it.key == provider}?.value
 		if(!providerClass) {
 			throw new ProviderNotFoundException(provider)
 		}
