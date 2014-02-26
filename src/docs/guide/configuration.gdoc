@@ -5,6 +5,7 @@ grailsApplication.config.grails.plugins.karman {
 	serveLocalStorage = true 
 	serveLocalMapping = 'storage' // means /storage is base path
 	storagePath = '/path/to/filestore'
+	defaultFileACL = com.bertramlabs.plugins.karman.CloudFileACL.Private
 }
 {code}
 
