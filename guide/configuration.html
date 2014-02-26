@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>3.3 Files 0.3.0</title>
+    <title>2 Configuration 0.3.0</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -20,17 +20,17 @@ function addJsClass() {
     <ul>
         <li>
             <div id="nav-summary" onmouseover="toggleNavSummary(false)" onmouseout="toggleNavSummary(true)">
-                <a href="../../guide/index.html" class="button">Table of contents</a>
+                <a href="../guide/index.html" class="button">Table of contents</a>
 
                 <div id="nav-summary-childs" style="display:none;">
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/introduction.html"><strong>1</strong><span>Introduction</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/introduction.html"><strong>1</strong><span>Introduction</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/configuration.html"><strong>2</strong><span>Configuration</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/configuration.html"><strong>2</strong><span>Configuration</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../../guide/usage.html"><strong>3</strong><span>Usage</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/usage.html"><strong>3</strong><span>Usage</span></a>
                     </div>
                     
                 </div>
@@ -56,16 +56,18 @@ function addJsClass() {
             <div id="main" class="corner-all">
 
                 
-                    <div class="toc-item prev-left"><a href="../../guide/configuration.html">&lt;&lt; <strong>2</strong><span>Configuration</span></a></div>
+                    <div class="toc-item prev-left"><a href="../guide/introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
                 
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
 
                 
+                    <div class="toc-item next-right"><a href="../guide/usage.html"><strong>3</strong><span>Usage</span> >></a></div>
+                
 
 
                 <div class="project">
-                    <h1>3.3 Files - Reference Documentation</h1>
+                    <h1>2 Configuration - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> David Estes</p>
 
@@ -78,23 +80,20 @@ function addJsClass() {
 
                 
 
-<h2 id="files">3.3 Files</h2>
-Working with files in the Karman plugin is fairly simple and most methods of the <code>CloudFile</code> interface should be supported.
-The <code>CloudFile</code> tries to adhere to similar methods in the <code>File</code> class to make it simpler to deal with. For example:<p class="paragraph"/><div class="code"><pre>def file = provider&#91;'mybucket'&#93;&#91;'test.txt'&#93;<p class="paragraph"/><span class="java&#45;keyword">return</span> file.text
-//or 
-<span class="java&#45;keyword">return</span> file.getText('UTF&#45;8')
-//or
-<span class="java&#45;keyword">return</span> file.bytes
-//or
-<span class="java&#45;keyword">return</span> file.inputStream</pre></div><p class="paragraph"/>In the cloud, files typically have a lot more meta data tied to them. To deal with this we have methods for <code>getContentType</code> and <code>setContentType</code>. More complex meta data is still being worked on.<p class="paragraph"/>When setting content values of a CloudFile, the contents are not immediately persisted (except in the LocalStorage implementation). To save your changes make sure the <code>save()</code> method is called:<p class="paragraph"/><div class="code"><pre>def file = provider&#91;'mybucket'&#93;&#91;'test.txt'&#93;<p class="paragraph"/>file.text = <span class="java&#45;quote">"Setting some value to <span class="java&#45;keyword">this</span> file"</span>
-file.save()</pre></div><p class="paragraph"/>Files can be deleted as well:<p class="paragraph"/><div class="code"><pre>file.delete()</pre></div><p class="paragraph"/>Public Url can be fetched for a file via <code>getURL</code>:<p class="paragraph"/><div class="code"><pre>file.getURL()
-//or <span class="java&#45;keyword">if</span> <span class="java&#45;keyword">private</span> and need <span class="java&#45;keyword">public</span>
-file.getURL(1.hour) //retrive a url good <span class="java&#45;keyword">for</span> 1 hour</pre></div><p class="paragraph"/>NOTE: The above is not yet fully implemented , stay tuned!
+<h1 id="configuration">2 Configuration</h1>
+Since Karman ships with the <code>LocalStorageProvider</code>. It also provides mappings for fetching files from this store. This can be configured with the following options:<p class="paragraph"/><div class="code"><pre>grailsApplication.config.grails.plugins.karman &#123;
+	serveLocalStorage = <span class="java&#45;keyword">true</span> 
+	serveLocalMapping = 'storage' // means /storage is base path
+	storagePath = '/path/to/filestore'
+&#125;</pre></div><p class="paragraph"/><h4>Loading The Karman Config Holder</h4><p class="paragraph"/>Karman provides a class called the <code>KarmanConfigHolder</code> . This class contains static references to both the <code>grailsApplication</code> object and the config map. This contains default config values. 
+On app startup, the config holder is loaded with values from <code>Config.groovy</code>. In order to use with Gant, you will need to include the <code>_InitKarman</code> script and call the <code>initKarman</code> target.
 
 
                 <div style="clear:both;margin-top:15px;"></div>
                 
-                    <div class="toc-item prev-left"><a href="../../guide/configuration.html">&lt;&lt; <strong>2</strong><span>Configuration</span></a></div>
+                    <div class="toc-item prev-left"><a href="../guide/introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
+                
+                    <div class="toc-item next-right"><a href="../guide/usage.html"><strong>3</strong><span>Usage</span> >></a></div>
                 
                 <div style="clear:both"></div>
             </div>
@@ -102,7 +101,7 @@ file.getURL(1.hour) //retrive a url good <span class="java&#45;keyword">for</spa
         <td id="col2">
             <div class="local clearfix">
                 <div class="local-title">
-                    <a href="../../guide/index.html" target="mainFrame">Quick Reference</a>
+                    <a href="../guide/index.html" target="mainFrame">Quick Reference</a>
                     <span class="toggle">(<a href="#" onclick="localToggle(); return false;">hide</a>)</span>
                 </div>
                 <div class="menu">
@@ -110,13 +109,13 @@ file.getURL(1.hour) //retrive a url good <span class="java&#45;keyword">for</spa
                     <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">Classes</h1><div class="menu-sub">
                         
                             
-                            <div class="menu-item"><a href="../../ref/Classes/CloudFile.html">CloudFile</a>
+                            <div class="menu-item"><a href="../ref/Classes/CloudFile.html">CloudFile</a>
                             </div>
                             
-                            <div class="menu-item"><a href="../../ref/Classes/Directory.html">Directory</a>
+                            <div class="menu-item"><a href="../ref/Classes/Directory.html">Directory</a>
                             </div>
                             
-                            <div class="menu-item"><a href="../../ref/Classes/StorageProvider.html">StorageProvider</a>
+                            <div class="menu-item"><a href="../ref/Classes/StorageProvider.html">StorageProvider</a>
                             </div>
                             
                             </div>
@@ -125,10 +124,10 @@ file.getURL(1.hour) //retrive a url good <span class="java&#45;keyword">for</spa
                     <div class="menu-block"><h1 class="menu-title" onclick="toggleRef(this.parentNode.childNodes[1])">LocalStorage</h1><div class="menu-sub">
                         
                             
-                            <div class="menu-item"><a href="../../ref/LocalStorage/LocalDirectory.html">LocalDirectory</a>
+                            <div class="menu-item"><a href="../ref/LocalStorage/LocalDirectory.html">LocalDirectory</a>
                             </div>
                             
-                            <div class="menu-item"><a href="../../ref/LocalStorage/LocalStorageProvider.html">LocalStorageProvider</a>
+                            <div class="menu-item"><a href="../ref/LocalStorage/LocalStorageProvider.html">LocalStorageProvider</a>
                             </div>
                             
                             </div>

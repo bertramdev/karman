@@ -2,7 +2,7 @@
                       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>2 Usage 0.1.0</title>
+    <title>3 Usage 0.3.0</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen, print" title="Style" charset="utf-8"/>
     <link rel="stylesheet" href="../css/pdf.css" type="text/css" media="print" title="PDF" charset="utf-8"/>
@@ -27,7 +27,10 @@ function addJsClass() {
                     <div class="toc-item" style="margin-left:0"><a href="../guide/introduction.html"><strong>1</strong><span>Introduction</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0"><a href="../guide/usage.html"><strong>2</strong><span>Usage</span></a>
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/configuration.html"><strong>2</strong><span>Configuration</span></a>
+                    </div>
+                    
+                    <div class="toc-item" style="margin-left:0"><a href="../guide/usage.html"><strong>3</strong><span>Usage</span></a>
                     </div>
                     
                 </div>
@@ -53,7 +56,7 @@ function addJsClass() {
             <div id="main" class="corner-all">
 
                 
-                    <div class="toc-item prev-left"><a href="../guide/introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
+                    <div class="toc-item prev-left"><a href="../guide/configuration.html">&lt;&lt; <strong>2</strong><span>Configuration</span></a></div>
                 
 
                 <span id='toggle-col1' class="toggle">(<a href="#" onclick="localToggle(); return false;">Quick Reference</a>)</span>
@@ -62,11 +65,11 @@ function addJsClass() {
 
 
                 <div class="project">
-                    <h1>2 Usage - Reference Documentation</h1>
+                    <h1>3 Usage - Reference Documentation</h1>
 
                     <p><strong>Authors:</strong> David Estes</p>
 
-                    <p><strong>Version:</strong> 0.1.0</p>
+                    <p><strong>Version:</strong> 0.3.0</p>
 
                     
                 </div>
@@ -75,13 +78,13 @@ function addJsClass() {
                 <div id="table-of-content">
                     <h2>Table of Contents</h2>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#providers"><strong>2.1</strong><span>Providers</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#providers"><strong>3.1</strong><span>Providers</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#directories"><strong>2.2</strong><span>Directories</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#directories"><strong>3.2</strong><span>Directories</span></a>
                     </div>
                     
-                    <div class="toc-item" style="margin-left:0px"><a href="#files"><strong>2.3</strong><span>Files</span></a>
+                    <div class="toc-item" style="margin-left:0px"><a href="#files"><strong>3.3</strong><span>Files</span></a>
                     </div>
                     
                 </div>
@@ -89,18 +92,18 @@ function addJsClass() {
 
                 
 
-<h1 id="usage">2 Usage</h1>
+<h1 id="usage">3 Usage</h1>
 There are several tips and tricks to taking advantage of the Karman Storage API. This guide should get you started and is still a work in progress so expect more down the road.
 
 
-<h2 id="providers">2.1 Providers</h2>
+<h2 id="providers">3.1 Providers</h2>
 Karman provides a uniform interface in dealing with cloud stored files. It does this starting with the Provider class. 
 The Provider class is the starting point and is responsible for storing any credentials needed to interface with your cloud provider as well as instantiating Directories.
-By default the core Karman plugin comes with a LocalStorageProvider implementation:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> com.plugins.bertramlabs.karman.local.LocalStorageProvider<p class="paragraph"/>def provider = <span class="java&#45;keyword">new</span> LocalStorageProvider(basePath: '/path/to/store')</pre></div><p class="paragraph"/>As can be seen above the LocalStorageProvider provides an interface to a storage path on your filesystem. The plugin is designed to be very extensible and more providers are in the works such as the <code>karman-aws</code> plugin which will provide the <code>S3StorageProvider</code> for interfacing with S3.<p class="paragraph"/><h3>Getting Directories</h3><p class="paragraph"/>A Provider provides an interface to get or create root directories on the cloud. Most cloud providers dont use full folder trees but rather files with names containing a '/'. In the case of the S3Provider, a Directory can be considered Synonymous with a Bucket.<p class="paragraph"/>There are several ways get interact with directories. For example to get a list of directories we simply do the following:<p class="paragraph"/><div class="code"><pre>provider.getDirectories()</pre></div><p class="paragraph"/>This will return an array of <code>Directory</code> compatible classes.<p class="paragraph"/>Another option is to simply ask for a reference to a directory or bucket directly. This can be done by simply doing:<p class="paragraph"/><div class="code"><pre>provider.getDirectory('mybucket')</pre></div><p class="paragraph"/>This will return a directory object wether it exists or not. You can test for existance via the <code>exists()</code> method or call <code>mkdir()</code> to create the directory (more on this later).<p class="paragraph"/>We also take advantage of some groovy magic to make for some nifty shorthand to get a directory:<p class="paragraph"/><div class="code"><pre>provider&#91;'mybucket'&#93; //equivalent to getDirectory</pre></div>
+By default the core Karman plugin comes with a LocalStorageProvider implementation:<p class="paragraph"/><div class="code"><pre><span class="java&#45;keyword">import</span> com.bertramlabs.plugins.karman.local.LocalStorageProvider<p class="paragraph"/>def provider = <span class="java&#45;keyword">new</span> LocalStorageProvider(basePath: '/path/to/store')</pre></div><p class="paragraph"/>As can be seen above the LocalStorageProvider provides an interface to a storage path on your filesystem. The plugin is designed to be very extensible and more providers are in the works such as the <code>karman-aws</code> plugin which will provide the <code>S3StorageProvider</code> for interfacing with S3.<p class="paragraph"/><h3>Getting Directories</h3><p class="paragraph"/>A Provider provides an interface to get or create root directories on the cloud. Most cloud providers dont use full folder trees but rather files with names containing a '/'. In the case of the S3Provider, a Directory can be considered Synonymous with a Bucket.<p class="paragraph"/>There are several ways get interact with directories. For example to get a list of directories we simply do the following:<p class="paragraph"/><div class="code"><pre>provider.getDirectories()</pre></div><p class="paragraph"/>This will return an array of <code>Directory</code> compatible classes.<p class="paragraph"/>Another option is to simply ask for a reference to a directory or bucket directly. This can be done by simply doing:<p class="paragraph"/><div class="code"><pre>provider.getDirectory('mybucket')</pre></div><p class="paragraph"/>This will return a directory object wether it exists or not. You can test for existance via the <code>exists()</code> method or call <code>mkdir()</code> to create the directory (more on this later).<p class="paragraph"/>We also take advantage of some groovy magic to make for some nifty shorthand to get a directory:<p class="paragraph"/><div class="code"><pre>provider&#91;'mybucket'&#93; //equivalent to getDirectory</pre></div>
 
 
 
-<h2 id="directories">2.2 Directories</h2>
+<h2 id="directories">3.2 Directories</h2>
 The <code>Directory</code> abstract class provides more convenience methods for getting files or creating files within your cloud provider.<p class="paragraph"/>We can start by simply listing all the files in our bucket/directory:<p class="paragraph"/><div class="code"><pre>provider&#91;'mybucket'&#93;.listFiles()</pre></div><p class="paragraph"/>The above will return an array of CloudFile objects. The listFiles method will also accept a few optional paramenters (this can vary slightly between providers but a few are considered standard). 
 One of which is the prefix option. It is important to note that the listFiles() method is a recursive scan and should list all files (wether nested or not).
 In cases where you may just want files within a subfolder you can do something like:<p class="paragraph"/><div class="code"><pre>provider&#91;'mybucket'&#93;.listFiles(prefix: 'config/') //List only files in the config path</pre></div><p class="paragraph"/>A Directory also supports several shortcuts for getting individual files:<p class="paragraph"/><div class="code"><pre>provider&#91;'mybucket'&#93;.getFile('test.txt')</pre></div><p class="paragraph"/>This will return a file object wether it exists or not. Use the <code>exists()</code> method on the CloudFile to determine existance.
@@ -109,7 +112,7 @@ provider&#91;'mybucket'&#93;&#91;'test.txt'&#93; = <span class="java&#45;keyword
 s3provider&#91;'mybucket'&#93;&#91;'test.txt'&#93; = rackspace&#91;'mybucket'&#93;&#91;'test.txt'&#93;</pre></div><p class="paragraph"/>These are nifty shorthands for getting to the point with your files. In many cases though you will need more fine grained control over your file contents, meta, and upload strategy. To do this we can use the CloudFile directly.
 
 
-<h2 id="files">2.3 Files</h2>
+<h2 id="files">3.3 Files</h2>
 Working with files in the Karman plugin is fairly simple and most methods of the <code>CloudFile</code> interface should be supported.
 The <code>CloudFile</code> tries to adhere to similar methods in the <code>File</code> class to make it simpler to deal with. For example:<p class="paragraph"/><div class="code"><pre>def file = provider&#91;'mybucket'&#93;&#91;'test.txt'&#93;<p class="paragraph"/><span class="java&#45;keyword">return</span> file.text
 //or 
@@ -125,7 +128,7 @@ file.getURL(1.hour) //retrive a url good <span class="java&#45;keyword">for</spa
 
                 <div style="clear:both;margin-top:15px;"></div>
                 
-                    <div class="toc-item prev-left"><a href="../guide/introduction.html">&lt;&lt; <strong>1</strong><span>Introduction</span></a></div>
+                    <div class="toc-item prev-left"><a href="../guide/configuration.html">&lt;&lt; <strong>2</strong><span>Configuration</span></a></div>
                 
                 <div style="clear:both"></div>
             </div>
