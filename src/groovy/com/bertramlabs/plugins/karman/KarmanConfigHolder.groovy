@@ -8,7 +8,6 @@ class KarmanConfigHolder {
 	
 	static grailsApplication
 
-
 	static void setConfig(configMap) {
 		config += configMap
 	}

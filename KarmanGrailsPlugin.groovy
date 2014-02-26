@@ -21,5 +21,6 @@ class KarmanGrailsPlugin {
         def config = application.config.grails.plugins.karman
 
         KarmanConfigHolder.config = config
+        KarmanConfigHolder.grailsApplication = application
     }
 }
