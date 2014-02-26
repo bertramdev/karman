@@ -43,4 +43,9 @@ abstract class CloudFile implements CloudFileInterface {
 	String toString() {
 		return name
 	}
+
+
+	def save() {
+		save(provider.defaultFileACL)
+	}
 }

@@ -7,3 +7,8 @@ grailsApplication.config.grails.plugins.karman {
 	storagePath = '/path/to/filestore'
 }
 {code}
+
+h4. Loading The Karman Config Holder
+
+Karman provides a class called the @KarmanConfigHolder@ . This class contains static references to both the @grailsApplication@ object and the config map. This contains default config values. 
+On app startup, the config holder is loaded with values from @Config.groovy@. In order to use with Gant, you will need to include the @_InitKarman@ script and call the @initKarman@ target.

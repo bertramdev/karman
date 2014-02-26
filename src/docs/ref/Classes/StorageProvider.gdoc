@@ -24,3 +24,5 @@ To initialize a @LocalStorageProvider@ all that is needed is a basePath on your 
 
 * @getDirectories@ - Fetches a list of directories / buckets.
 * @getDirectory@ - Fetches a specific directory or creatse a new instance of a directory.
+* @getDefaultFileACL@ - Fetches the Default File Access Control value for saving.
+* @setDefaultFileACL@ - Scope this specific provider instane to a default File Access Control Value.
