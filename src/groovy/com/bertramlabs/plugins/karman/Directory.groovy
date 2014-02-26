@@ -16,6 +16,9 @@
 
 package com.bertramlabs.plugins.karman
 
+import com.bertramlabs.plugins.karman.util.Mimetypes
+import org.codehaus.groovy.grails.web.context.ServletContextHolder
+
 /** Provides a standardized interface for dealing with files stored in the cloud.
 */
 abstract class Directory implements DirectoryInterface {
@@ -34,7 +37,7 @@ abstract class Directory implements DirectoryInterface {
 	public void putAt(String key, File file)  {
 		def cloudFile = getFile(key)
 		def servletContext = org.codehaus.groovy.grails.web.context.ServletContextHolder.getServletContext()
-		def mimeType = servletContext ? servletContext.getMimeType(key) : java.net.URLConnection.guessContentTypeFromName(key)
+		def mimeType = servletContext ? servletContext.getMimeType(key) : Mimetypes.instance.getMimetype(key)
 		if(mimeType) {
 			cloudFile.contentType = mimeType
 		}
@@ -51,8 +54,8 @@ abstract class Directory implements DirectoryInterface {
 
 	public void putAt(String key, byte[] bytes)  {
 		def cloudFile = getFile(key)
-		def servletContext = org.codehaus.groovy.grails.web.context.ServletContextHolder.getServletContext()
-		def mimeType = servletContext ? servletContext.getMimeType(key) : java.net.URLConnection.guessContentTypeFromName(key)
+		def servletContext = ServletContextHolder.getServletContext()
+		def mimeType = servletContext ? servletContext.getMimeType(key) : Mimetypes.instance.getMimetype(key)
 		if(mimeType) {
 			cloudFile.contentType = mimeType
 		}
@@ -62,8 +65,8 @@ abstract class Directory implements DirectoryInterface {
 
 	public void putAt(String key, String text)  {
 		def cloudFile = getFile(key)
-		def servletContext = org.codehaus.groovy.grails.web.context.ServletContextHolder.getServletContext()
-		def mimeType = servletContext ? servletContext.getMimeType(key) : java.net.URLConnection.guessContentTypeFromName(key)
+		def servletContext = ServletContextHolder.getServletContext()
+		def mimeType = servletContext ? servletContext.getMimeType(key) : Mimetypes.instance.getMimetype(key)
 		if(mimeType) {
 			cloudFile.contentType = mimeType
 		}
