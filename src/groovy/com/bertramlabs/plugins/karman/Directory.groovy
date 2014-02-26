@@ -16,6 +16,9 @@
 
 package com.bertramlabs.plugins.karman
 
+import com.bertramlabs.plugins.karman.util.Mimetypes
+import org.codehaus.groovy.grails.web.context.ServletContextHolder
+
 /** Provides a standardized interface for dealing with files stored in the cloud.
 */
 abstract class Directory implements DirectoryInterface {
@@ -31,28 +34,21 @@ abstract class Directory implements DirectoryInterface {
 		getFile(key)
 	}
 
-	public void putAt(String key, File file)  {
-		def cloudFile = getFile(key)
-		def servletContext = org.codehaus.groovy.grails.web.context.ServletContextHolder.getServletContext()
-		def mimeType = servletContext ? servletContext.getMimeType(key) : java.net.URLConnection.guessContentTypeFromName(key)
-		if(mimeType) {
-			cloudFile.contentType = mimeType
-		}
-		cloudFile.bytes = file.bytes
-		cloudFile.save()
-	}
-
 	public void putAt(String key, CloudFile file)  {
-		def cloudFile = getFile(key)
-		cloudFile.contentType = file.contentType	
-		cloudFile.bytes = file.bytes
-		cloudFile.save()
+		file.save()
 	}
 
-	public void putAt(String key, byte[] bytes)  {
+    public void putAt(String key, File file)  {
+        putAt(key, file.bytes)
+    }
+
+    public void putAt(String key, byte[] bytes)  {
 		def cloudFile = getFile(key)
-		def servletContext = org.codehaus.groovy.grails.web.context.ServletContextHolder.getServletContext()
-		def mimeType = servletContext ? servletContext.getMimeType(key) : java.net.URLConnection.guessContentTypeFromName(key)
+		def servletContext = ServletContextHolder.getServletContext()
+		def mimeType = servletContext ? servletContext.getMimeType(key) : ''
+        if (!mimeType) {
+            mimeType = Mimetypes.instance.getMimetype(key)
+        }
 		if(mimeType) {
 			cloudFile.contentType = mimeType
 		}
@@ -62,16 +58,19 @@ abstract class Directory implements DirectoryInterface {
 
 	public void putAt(String key, String text)  {
 		def cloudFile = getFile(key)
-		def servletContext = org.codehaus.groovy.grails.web.context.ServletContextHolder.getServletContext()
-		def mimeType = servletContext ? servletContext.getMimeType(key) : java.net.URLConnection.guessContentTypeFromName(key)
-		if(mimeType) {
+		def servletContext = ServletContextHolder.getServletContext()
+		def mimeType = servletContext ? servletContext.getMimeType(key) : ''
+        if (!mimeType) {
+            mimeType = Mimetypes.instance.getMimetype(key)
+        }
+        if(mimeType) {
 			cloudFile.contentType = mimeType
 		}
 		cloudFile.text = text
 		cloudFile.save()
 	}
 
-	def mkdir() {
+    def mkdir() {
 		save()
 	}
 
@@ -85,5 +84,6 @@ abstract class Directory implements DirectoryInterface {
 
 	String toString() {
 		return name
-	}
+    }
+
 }
