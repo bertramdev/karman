@@ -6,6 +6,13 @@ class LocalStorageController {
     def show() { 
     	def config      = grailsApplication.config.grails.plugins.karman
     	def storagePath = config.local.storagePath
+        
+        if(!storagePath) {
+            log.error("Karman Local Storage Path Not Specified. Please specify in your Config.groovy property: grails.plugins.karman.local.storagePath")
+            render status: 500
+            return
+        }
+
 		def provider    = new LocalStorageProvider(basePath: storagePath)
 		def extension   = extensionFromURI(request.forwardURI)
 		def directoryName = params.directory ?: '.'
@@ -21,7 +28,7 @@ class LocalStorageController {
         	render status: 402
         	return
         }
-        def localFile = provider[directoryName][filename]
+        def localFile = provider[directoryName][fileName]
         if(!localFile.exists()) {
             render status: 404
             return
@@ -33,7 +40,7 @@ class LocalStorageController {
         response.contentType = format
 
         if(config.local.sendFileHeader) {
-            response.setHeader(config.local.sendFileHeader, localFile.fsFile.canonicalPath
+            response.setHeader(config.local.sendFileHeader, localFile.fsFile.canonicalPath)
         } else {
             response.outputStream << localFile.bytes
             response.flushBuffer()    

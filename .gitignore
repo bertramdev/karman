@@ -10,7 +10,7 @@
 .settings
 /*.launch
 /*.tmproj
-
+storage/
 *.log
 *.zip
 *.iml
