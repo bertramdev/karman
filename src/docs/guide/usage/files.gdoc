@@ -38,4 +38,13 @@ file.getURL()
 file.getURL(1.hour) //retrive a url good for 1 hour
 {code}
 
-NOTE: The above is not yet fully implemented , stay tuned!
+h3. Permissions
+
+Storing files in the cloud can have several security implications that may differ from your local file system behavior. This is where the @CloudFileACL@ enumerator comes in.
+This interface attempts to provide a standard set of permissions that can be assigned to a file upon save, or as a default ACL for your provider class.
+
+{code}
+  def provider = new StorageProvider(provider: 's3', defaultFileACL: CloudFileACL.publicRead)
+  //or for a file
+  file.save(CloudFileACL.publicRead)
+{code}

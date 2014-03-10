@@ -3,11 +3,12 @@ The Provider class is the starting point and is responsible for storing any cred
 By default the core Karman plugin comes with a LocalStorageProvider implementation:
 
 {code}
-import com.bertramlabs.plugins.karman.local.LocalStorageProvider
+import com.bertramlabs.plugins.karman
 
-def provider = new LocalStorageProvider(basePath: '/path/to/store')
+def provider = StorageProvider.create(provider: 'local', basePath: '/path/to/store')
 {code}
 
+The default StorageProvider class provides a factory implementation for creating class instances of the individual provider classes.
 As can be seen above the LocalStorageProvider provides an interface to a storage path on your filesystem. The plugin is designed to be very extensible and more providers are in the works such as the @karman-aws@ plugin which will provide the @S3StorageProvider@ for interfacing with S3.
 
 h3. Getting Directories

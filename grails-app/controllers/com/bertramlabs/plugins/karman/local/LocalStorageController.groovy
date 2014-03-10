@@ -21,11 +21,24 @@ class LocalStorageController {
         	render status: 402
         	return
         }
+        def localFile = provider[directoryName][filename]
+        if(!localFile.exists()) {
+            render status: 404
+            return
+        }
 
-	    response.characterEncoding = request.characterEncoding
-	    response.contentType = format
-		response.outputStream << provider[directoryName][fileName].bytes
-		response.flushBuffer()
+        // TODO: Private File Restrictions
+
+        response.characterEncoding = request.characterEncoding
+        response.contentType = format
+
+        if(config.local.sendFileHeader) {
+            response.setHeader(config.local.sendFileHeader, localFile.fsFile.canonicalPath
+        } else {
+            response.outputStream << localFile.bytes
+            response.flushBuffer()    
+        }
+	    
     }
 
     private extensionFromURI(uri) {
