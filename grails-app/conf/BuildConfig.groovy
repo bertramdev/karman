@@ -5,9 +5,16 @@ grails.project.dependency.resolution = {
     inherits 'global'
     log 'warn'
     legacyResolve false
+    
     repositories {
         grailsCentral()
         mavenCentral()
+        mavenRepo 'http://dl.bintray.com/karman/karman'
+
+    }
+
+    dependencies {
+        compile 'com.bertramlabs.plugins:karman-core:0.4.0'
     }
 
     plugins {
