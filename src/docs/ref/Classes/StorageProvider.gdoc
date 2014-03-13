@@ -34,9 +34,9 @@ Registering a new provider type is pretty straightforward. There are 2 critical 
 The first is in your plugin initialization @doWithApplicationContext@ method or your application's bootstrap.
 
 {code}
-import com.bertramlabs.plugins.karman.KarmanConfigHolder
+import com.bertramlabs.plugins.karman.StorageProvider
 
-KarmanConfigHolder.providerTypes += [myprovider: MyProviderClass]
+StorageProvider.registerProvider(MyProviderClass)
 {code}
 
 The other place you would want to add a custom provider is via the GANT event @KarmanConfig@.
