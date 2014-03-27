@@ -3,7 +3,7 @@ import com.bertramlabs.plugins.karman.StorageProvider
 import com.bertramlabs.plugins.karman.local.LocalStorageProvider
 
 class KarmanGrailsPlugin {
-    def version         = "0.4.0"
+    def version         = "0.5.0"
     def grailsVersion   = "2.0 > *"
     def title           = "Karman Plugin"
     def author          = "David Estes"
