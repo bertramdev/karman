@@ -5,7 +5,7 @@ grails.project.dependency.resolution = {
     inherits 'global'
     log 'warn'
     legacyResolve false
-    
+
     repositories {
         grailsCentral()
         mavenCentral()
@@ -14,7 +14,7 @@ grails.project.dependency.resolution = {
     }
 
     dependencies {
-        compile 'com.bertramlabs.plugins:karman-core:0.5.1'
+        compile 'com.bertramlabs.plugins:karman-core:0.5.2'
     }
 
     plugins {
