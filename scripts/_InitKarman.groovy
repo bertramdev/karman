@@ -7,7 +7,7 @@ target(initKarman: "Load Karman Config to Configuration Holder") {
     def storageProvider = classLoader.loadClass('com.bertramlabs.plugins.karman.StorageProvider')
     def localStorageProvider = classLoader.loadClass('com.bertramlabs.plugins.karman.local.LocalStorageProvider')
     storageProvider.registerProvider(localStorageProvider)
-    karmanConfigHolder.config = grailsApp.config.grails.plugins.karman
+    karmanConfigHolder.config = grailsApp.config.grails.plugin.karman
 
 	event("KarmanConfig", [karmanConfigHolder])
 

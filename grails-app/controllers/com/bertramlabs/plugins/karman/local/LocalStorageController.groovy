@@ -4,7 +4,7 @@ class LocalStorageController {
 	def grailsApplication
 
     def show() {
-    	def config      = grailsApplication.config.grails.plugins.karman
+    	def config      = grailsApplication.config.grails.plugin.karman
     	def storagePath = config.storagePath
 
         if(!storagePath) {

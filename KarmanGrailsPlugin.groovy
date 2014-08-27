@@ -3,7 +3,7 @@ import com.bertramlabs.plugins.karman.StorageProvider
 import com.bertramlabs.plugins.karman.local.LocalStorageProvider
 
 class KarmanGrailsPlugin {
-    def version         = "0.5.3.1"
+    def version         = "0.5.3.2"
     def grailsVersion   = "2.0 > *"
     def title           = "Karman Plugin"
     def author          = "David Estes"
@@ -20,7 +20,7 @@ class KarmanGrailsPlugin {
 
 
     def doWithApplicationContext = { applicationContext ->
-        def config = application.config.grails.plugins.karman
+        def config = application.config.grails.plugin.karman
         StorageProvider.registerProvider(LocalStorageProvider)
 
         KarmanConfigHolder.config = config
