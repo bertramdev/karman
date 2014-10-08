@@ -5,7 +5,7 @@ class LocalStorageController {
 
     def show() {
     	def config      = grailsApplication.config.grails.plugin.karman
-    	def storagePath = config.storagePath
+    	def storagePath = config.storagePath ?: 'storage'
 
         if(!storagePath) {
             log.error("Karman Local Storage Path Not Specified. Please specify in your Config.groovy property: grails.plugins.karman.local.storagePath")
