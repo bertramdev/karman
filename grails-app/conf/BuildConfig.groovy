@@ -9,12 +9,11 @@ grails.project.dependency.resolution = {
     repositories {
         grailsCentral()
         mavenCentral()
-        mavenRepo 'http://dl.bintray.com/karman/karman'
 
     }
 
     dependencies {
-        compile 'com.bertramlabs.plugins:karman-core:0.5.6'
+        compile 'com.bertramlabs.plugins:karman-core:0.6.1'
     }
 
     plugins {
