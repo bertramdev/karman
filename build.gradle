@@ -69,6 +69,17 @@ dependencies {
   compile 'com.bertramlabs.plugins:karman-core:0.6.2'
 }
 
+bintray {
+    publications = ['maven']
+    pkg {
+        repo = 'karman'
+        name = "karman-grails"
+        userOrg = 'bertramlabs'
+        licenses = ['Apache-2.0']
+    }
+}
+
+
 eclipse {
     classpath {
         plusConfigurations += [configurations.provided]
