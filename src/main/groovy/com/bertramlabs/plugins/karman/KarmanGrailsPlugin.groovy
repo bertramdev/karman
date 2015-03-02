@@ -1,8 +1,9 @@
-import com.bertramlabs.plugins.karman.KarmanConfigHolder
-import com.bertramlabs.plugins.karman.StorageProvider
-import com.bertramlabs.plugins.karman.local.LocalStorageProvider
+package com.bertramlabs.plugins.karman
 
-class KarmanGrailsPlugin {
+import com.bertramlabs.plugins.karman.local.LocalStorageProvider
+import grails.plugins.*
+
+class KarmanGrailsPlugin extends Plugin {
     def version         = "0.6.1"
     def grailsVersion   = "2.2 > *"
     def title           = "Karman Plugin"
@@ -20,7 +21,7 @@ class KarmanGrailsPlugin {
 
 
     def doWithApplicationContext = { applicationContext ->
-        def config = application.config.grails.plugin.karman
+        def config = grailsApplication.config.grails.plugin.karman
 
         KarmanConfigHolder.config = config
 

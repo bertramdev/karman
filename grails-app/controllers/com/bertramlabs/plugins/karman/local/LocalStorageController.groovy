@@ -1,7 +1,6 @@
 package com.bertramlabs.plugins.karman.local
 
 class LocalStorageController {
-	def grailsApplication
 
     def show() {
     	def config      = grailsApplication.config.grails.plugin.karman
@@ -14,7 +13,7 @@ class LocalStorageController {
         }
 
 		def provider    = new LocalStorageProvider(basePath: storagePath)
-		def extension   = extensionFromURI(request.forwardURI)
+		def extension   = extensionFromURI(request.requestURI)
 		def directoryName = params.directory ?: '.'
 		def fileName = params.id
         def format = servletContext.getMimeType(fileName)
@@ -24,7 +23,7 @@ class LocalStorageController {
         }
 
         // No reverse traversal!
-        if(request.forwardURI.contains('../') || request.forwardURI.contains('..\\')) {
+        if(request.requestURI.contains('../') || request.requestURI.contains('..\\')) {
         	render status: 402
         	return
         }

@@ -1,6 +1,8 @@
 # GRAILS files
 /web-app/WEB-INF
 /target
+build/
+.gradle/
 /target-eclipse
 
 # IDE files
