@@ -13,7 +13,7 @@ grails.project.dependency.resolution = {
     }
 
     dependencies {
-        compile 'com.bertramlabs.plugins:karman-core:0.10.2'
+        compile 'com.bertramlabs.plugins:karman-core:0.10.3'
     }
 
     plugins {
